@@ -37,36 +37,3 @@ class TicTacToe:
             return True
 
         return False
-
-    def toggle_player(self):
-        """Switch turns between players."""
-        self.active_player = "O" if self.active_player == "X" else "X"
-
-    def play_game(self):
-        """Launch the game loop."""
-        print("Welcome to Tic Tac Toe!")
-        self.show_board()
-
-        while True:
-            try:
-                move = input(f"Player {self.active_player}, enter your move (row,col): ")
-                r, c = map(int, move.split(","))
-                if self.place_marker(r, c):
-                    self.show_board()
-                    if self.is_winner():
-                        print(f"Player {self.active_player} wins!")
-                        break
-                    self.toggle_player()
-                else:
-                    print("Move not valid.")
-            except (ValueError, IndexError):
-                print("Invalid input. Enter row,col (e.g., 1,1).")
-
-            if all(space != " " for row in self.grid for space in row):
-                print("It's a draw!")
-                break
-
-# Start the game if executed directly
-if __name__ == "__main__":
-    game = TicTacToe()
-    game.play_game()
